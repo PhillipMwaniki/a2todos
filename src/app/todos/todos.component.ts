@@ -9,6 +9,7 @@ import { TodoService } from '../todo.service'
 export class TodosComponent implements OnInit {
 
   todos;
+  oldText;
   text;
   appstate = 'default';
   constructor(
@@ -31,6 +32,16 @@ export class TodosComponent implements OnInit {
   editTodo(todo){
     this.appstate = 'edit';
     this.text = todo.text;
+    this.oldText = todo.text;
+  }
+
+  updateTodo(){
+    for (var i=0;i<this.todos.length;i++) {
+      if (this.todos[i].text == this.oldText) {
+        this.todos[i].text = this.text;
+      }
+    }
+    this._todoService.updateTodo(this.oldText, this.text);
   }
 
   deleteTodo(todoText){

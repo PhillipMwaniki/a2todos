@@ -33,4 +33,15 @@ export class TodoService extends Init{
     localStorage.setItem('todos', JSON.stringify(todos));
   }
 
+  updateTodo(oldTodo, newTodo){
+    var todos = this.getTodos();
+    for (var i=0;i<todos.length;i++) {
+      if (todos[i].text == oldTodo) {
+        todos[i].text = newTodo;
+      }
+    }
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
 }

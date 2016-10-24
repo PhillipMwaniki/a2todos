@@ -1,8 +1,15 @@
-<h3>Add todo</h3>
+<div *ngIf="appstate == 'default'">
+  <h3>Add todo</h3>
 <form (submit)="addTodo()">
   <input type="text" [(ngModel)]="text" name="text">
 </form>
-
+</div>
+<div *ngIf="appstate == 'edit'">
+  <h3>Edit todo</h3>
+<form (submit)="updateTodo()">
+  <input type="text" [(ngModel)]="text" name="text">
+</form>
+</div>
 <h3>Todo List</h3>
 
 <ul>

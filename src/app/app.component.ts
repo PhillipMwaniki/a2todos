@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { TodosComponent } from './todos/todos.component';
+
+@NgModule({
+  declarations: [TodosComponent]
+})
 
 @Component({
   selector: 'app-root',

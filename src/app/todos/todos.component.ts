@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../todo.service'
 
 @Component({
   selector: 'app-todos',
@@ -9,24 +10,27 @@ export class TodosComponent implements OnInit {
 
   todos;
   text;
-  constructor() { }
+  appstate = 'default';
+  constructor(
+    private _todoService: TodoService
+  ) { }
 
   ngOnInit() {
-
-    this.todos = [
-      { text: 'Pick up kids'},
-      { text: 'Pick up mum'},
-      { text: 'Pick up wife'},
-      { text: 'Pick up dog'},
-      { text: 'Pick up cat'},
-    ];
+    this.todos = this._todoService.getTodos();
   }
 
   addTodo(){
-    this.todos.push({
+    var newTodo = {
       text: this.text
-    })
+    }
+    this.todos.push(newTodo);
+    this._todoService.addTodo(newTodo);
     this.text = "";
+  }
+
+  editTodo(todo){
+    this.appstate = 'edit';
+    this.text = todo.text;
   }
 
   deleteTodo(todoText){
@@ -35,6 +39,7 @@ export class TodosComponent implements OnInit {
         this.todos.splice(i, 1);
       }
     }
+    this._todoService.deleteTodo(todoText);
   }
 
 }
